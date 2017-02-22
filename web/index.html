@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Platos de Comida</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="/static/user_app/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/static/user_app/vendor/bootstrap/css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+	<script src="/static/user_app/vendor/jquery-3.1.1.min.js"></script>
+	<script src="/static/user_app/vendor/jquery.validate.min.js"></script>
+
+	<link rel="stylesheet" href="/static/user_app/login.min.css">
+
+</head>
+<body>
+	<div class="container-fluid page-background">
+		<div class="row page-content">
+			<!-- LOGIN FORM -->
+			<div class="text-center" style="padding:50px 0">
+				<div class="page-logo-image">
+					<img src="/static/images/page_logo.png">
+				</div>
+				<div class="logo">Inicio de Sesión</div>
+				<!-- Main Form -->
+				<div class="login-form-1">
+					<form id="login-form" class="text-left" method="POST">
+						<input type='hidden' name='csrfmiddlewaretoken' value='tinVWvavBSsxrcCT6S1TxkVToLwgVx7r' />
+						<div class="login-form-main-message"></div>
+						<div class="main-login-form">
+							<div class="login-group">
+								<div class="form-group">
+									<label for="username" class="sr-only">Nombre de Usuario</label>
+									<input type="text" class="form-control" id="username" name="username" placeholder="Nombre de Usuario">
+								</div>
+								<div class="form-group">
+									<label for="password" class="sr-only">Contraseña</label>
+									<input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+								</div>
+								<div class="form-group login-group-checkbox">
+									<input type="checkbox" id="remember" name="remember">
+									<label for="remember">Recordar</label>
+								</div>
+							</div>
+							<button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
+						</div>
+						<div class="etc-login-form">
+							<p>Olvidaste tu contraseña? <a href="/accounts/forgot/">Click Aqui</a></p>
+							<p>Eres usuario nuevo? <a href="/accounts/register/">Crear nueva cuenta</a></p>
+						</div>
+					</form>
+				</div>
+				<!-- end:Main Form -->
+			</div>
+		</div>
+	</div>
+	<script src="/static/user_app/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+;(function ($) {
+    "use strict";
+
+    var options = {
+        'btn-loading': '<i class="fa fa-spinner fa-pulse"></i>',
+        'btn-success': '<i class="fa fa-check"></i>',
+        'btn-error': '<i class="fa fa-remove"></i>',
+        'msg-success': 'En breve se redireccionara...',
+        'msg-error': 'Error con las credenciales!',
+        'useAJAX': false,
+    };
+
+    $("#login-form").validate({
+        rules: {
+            username: "required",
+            password: "required",
+        },
+        errorClass: "form-invalid"
+    });
+
+    $("#login-form").submit(function () {
+        remove_loading($(this));
+
+        if (options['useAJAX'] == true) {
+            dummy_submit_form($(this));
+
+            return false;
+        }
+    });
+
+    $("#register-form").validate({
+        rules: {
+            username: "required",
+            fullname: "required",
+            password1: {
+                required: true,
+                minlength: 8
+            },
+            password2: {
+                required: true,
+                minlength: 8,
+                equalTo: "#register-form [name=password1]"
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            agree: "required",
+        },
+        errorClass: "form-invalid",
+        errorPlacement: function (label, element) {
+            if (element.attr("type") === "checkbox" || element.attr("type") === "radio") {
+                element.parent().append(label);
+
+            }
+            else {
+                label.insertAfter(element); // standard behaviour
+            }
+        }
+    });
+
+    $("#register-form").submit(function () {
+        remove_loading($(this));
+
+        if (options['useAJAX'] == true) {
+            dummy_submit_form($(this));
+
+            return false;
+        }
+    });
+
+    $("#forgot-password-form").validate({
+        rules: {
+            email: "required",
+        },
+        errorClass: "form-invalid"
+    });
+
+    $("#forgot-password-form").submit(function () {
+        remove_loading($(this));
+
+        if (options['useAJAX'] == true) {
+            dummy_submit_form($(this));
+
+            return false;
+        }
+    });
+
+    function remove_loading($form) {
+        $form.find('[type=submit]').removeClass('error success');
+        $form.find('.login-form-main-message').removeClass('show error success').html('');
+    }
+
+    function form_loading($form) {
+        $form.find('[type=submit]').addClass('clicked').html(options['btn-loading']);
+    }
+
+    function form_success($form) {
+        $form.find('[type=submit]').addClass('success').html(options['btn-success']);
+        $form.find('.login-form-main-message').addClass('show success').html(options['msg-success']);
+    }
+
+    function form_failed($form) {
+        $form.find('[type=submit]').addClass('error').html(options['btn-error']);
+        $form.find('.login-form-main-message').addClass('show error').html(options['msg-error']);
+    }
+
+    function dummy_submit_form($form) {
+        if ($form.valid()) {
+            form_loading($form);
+
+            setTimeout(function () {
+                form_success($form);
+            }, 2000);
+        }
+    }
+
+})(jQuery);

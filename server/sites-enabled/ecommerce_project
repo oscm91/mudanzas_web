@@ -1,0 +1,43 @@
+server {
+
+    listen 80;
+    server_name 127.0.0.1;
+    charset utf-8;
+
+    client_max_body_size 100m;
+
+    location /static {
+        #alias /docker/srv/static;
+        alias /docker/web/ecommerce/static;
+    }
+
+    location /media {
+        alias /docker/srv/media;
+    }
+
+    location /static/admin {
+        alias /docker/srv/static/admin;
+    }
+
+    location /static/grappelli {
+        alias /docker/srv/static/grappelli;
+    }
+
+    location /static/debug_toolbar {
+        alias /docker/srv/static/debug_toolbar;
+    }
+
+    location /static/user_app {
+        alias /docker/web/user_app/static/user_app/;
+    }
+
+    access_log /docker/log/nginx/access.log;
+    error_log /docker/log/nginx/error.log;
+
+    location / {
+        proxy_pass http://web:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}

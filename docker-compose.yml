@@ -1,0 +1,54 @@
+version: '2'
+services:
+  web:
+    restart: always
+    build: ./web/
+    expose:
+      - "8000"
+    links:
+      - postgres:postgres
+      - redis:redis
+    env_file: .env
+    volumes:
+      - ./web:/docker/web
+      - /docker/srv/static
+      - /docker/srv/media
+    command: sh /docker/web/docker-entrypoint.sh
+
+  nginx:
+    restart: always
+    build: ./server/
+    ports:
+      - "80:80"
+    volumes_from:
+      - web
+    volumes:
+      - /var/log/nginx
+    links:
+      - web:web
+
+  postgres:
+    restart: always
+    image: postgres:latest
+    volumes_from:
+      - data
+    volumes:
+      - ./database/postgresql:/docker-entrypoint-initdb.d
+      - ./backups/postgresql:/docker/postgresql/backup/
+    env_file:
+      - .env
+    expose:
+      - "5432"
+
+  redis:
+    restart: always
+    image: redis:latest
+    expose:
+      - "6379"
+
+  data:
+    restart: always
+    image: alpine
+    volumes:
+      - /docker/postgresql
+    command: "true"

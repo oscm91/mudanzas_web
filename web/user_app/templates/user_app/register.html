@@ -1,0 +1,76 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Platos de Comida</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="{% static 'user_app/vendor/font-awesome/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'user_app/vendor/bootstrap/css/bootstrap.min.css' %}">
+	<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+	<script src="{% static 'user_app/vendor/jquery-3.1.1.min.js' %}"></script>
+	<script src="{% static 'user_app/vendor/jquery.validate.min.js' %}"></script>
+
+	<link rel="stylesheet" href="{% static 'user_app/login.min.css' %}">
+
+</head>
+<body>
+	<div class="container-fluid page-background">
+		<div class="row page-content">
+			<!-- REGISTRATION FORM -->
+            <div class="text-center" style="padding:50px 0">
+                <div class="page-logo-image">
+					<img src="{% static 'images/page_logo.png' %}">
+				</div>
+                <div class="logo">Registrar Cuenta</div>
+                <!-- Main Form -->
+                <div class="login-form-1">
+                    <form id="register-form" class="text-left" method="POST">
+                        {% csrf_token %}
+                        <div class="login-form-main-message"></div>
+                        <div class="main-login-form">
+                            <div class="login-group">
+                                <div class="form-group">
+                                    <label for="username" class="sr-only">Nombre de Usuario</label>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de Usuario">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password1" class="sr-only">Contraseña</label>
+                                    <input type="password" class="form-control" id="password1" name="password1" placeholder="Contraseña">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password2" class="sr-only">Confirmar Contraseña</label>
+                                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirmar Contraseña">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email" class="sr-only">Dirección de Correo Electronico</label>
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="Dirección de Correo Electronico">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fullname" class="sr-only">Nombre Completo</label>
+                                    <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Nombre Completo">
+                                </div>
+
+                                <div class="form-group login-group-checkbox">
+                                    <input type="checkbox" class="" id="agree" name="agree">
+                                    <label for="agree">De acuerdo con los <a href="#">terminos</a></label>
+                                </div>
+                            </div>
+                            <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
+                        </div>
+                        <div class="etc-login-form">
+                            <p>Si tienes una cuenta? <a href="{% url 'login' %}">Ingresa aqui</a></p>
+                        </div>
+                    </form>
+                </div>
+                <!-- end:Main Form -->
+            </div>
+		</div>
+	</div>
+
+    <script src="{% static 'user_app/login.js' %}"></script>
+</body>
+</html>
