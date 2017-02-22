@@ -31,7 +31,7 @@ class CargoUploadView(View):
                 data['items'].append({'values': content_file[int(i + 1): i + int(content_file[i]) + 1]})
                 i = i + int(content_file[i]) + 1
 
-            resp = requests_api.post('http://138.68.48.167:3000/api/trackings', json=data)
+            resp = requests_api.post('http://162.243.43.133:3000/api/trackings', json=data)
 
             if resp.status_code != 200:
                 resultJSON = {'success': False, 'error': '%s' % repr(resp.status_code)}
